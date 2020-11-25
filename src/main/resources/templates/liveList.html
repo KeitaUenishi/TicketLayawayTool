@@ -3,28 +3,56 @@
 <head>
 <meta charset="UTF-8" />
 <title>Live一覧</title>
+
+		<!-- 1.cssとjavascriptのファイルを読み込む -->
+		<link rel="stylesheet" href="/css/bootstrap.css" />
+		<script src="/js/jquery.js"></script>
+		<script src="/js/bootstrap.js"></script>
+
 </head>
 <body>
 
-	<h1>Live一覧画面</h1>
+	<div class="container">
 
-	<table border="1">
+		<!--ヘッダー -->
+		<header class="mt-5">
+		<div id="header-container" th:insert="layout/header :: fra-header"></div>
+		</header>
 
-	<tr>
-		<th>日程</th>
-		<th>場所</th>
-		<th>備考</th>
-	</tr>
+		<div class="row mt-5">
 
-	<th:block th:with="live=${liveList}">
-		<tr th:each="liveList : ${live}">
-		<td th:text="${liveList.dateId}"></td>
-		<td th:text="${liveList.place}"></td>
-		<td th:text="${liveList.remarks}"></td>
-      </tr>
-    </th:block>
+		<!--col-smで解像度がスマホ(～767px)以下の時、２列表示 -->
 
-  </table>
+		<!--メニュー・サイドバー -->
+		<nav class="col-sm-2">
+		<div id="sidebar-container"
+			th:insert="layout/sidebar :: fra-sidebar"></div>
+		</nav>
 
+		<!--メイン -->
+		<section id="main-container" class="offset-sm-1 col-sm-9">
+		<table class="table">
+
+		<tr>
+			<th>日程</th>
+			<th>場所</th>
+			<th>備考</th>
+		</tr>
+
+		<th:block th:with="live=${liveList}">
+			<tr th:each="liveList : ${live}">
+				<td th:text="${liveList.dateId}"></td>
+				<td th:text="${liveList.place}"></td>
+				<td th:text="${liveList.remarks}"></td>
+					<td><a class="btn btn-success"
+					th:href="@{/liveList/edit/{id}(id=${liveList.dateId})}">編集</a></td>
+					<td><a class="btn btn-danger"
+					th:href="@{/liveList/delete/{id}(id=${liveList.dateId})}">削除</a></td>
+			</tr>
+		</th:block>
+
+	</table>
+
+	</div>
 </body>
 </html>
