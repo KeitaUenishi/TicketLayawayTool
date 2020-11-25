@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Live一覧</title>
+</head>
+<body>
+
+	<h1>Live一覧画面</h1>
+
+	<table border="1">
+
+	<tr>
+		<th>日程</th>
+		<th>場所</th>
+		<th>備考</th>
+	</tr>
+
+	<th:block th:with="live=${liveList}">
+		<tr th:each="liveList : ${live}">
+		<td th:text="${liveList.dateId}"></td>
+		<td th:text="${liveList.place}"></td>
+		<td th:text="${liveList.remarks}"></td>
+      </tr>
+    </th:block>
+
+  </table>
+
+</body>
+</html>
